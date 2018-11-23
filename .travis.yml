@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t JarnoKoo/react-test -f ./client/Dockerfile.dev
+  - docker build -t jarnokoo/react-test -f ./client/Dockerfile.dev
 
 script:
-  - docker run JarnoKoo/react-test npm test -- --coverage
+  - docker run jarnokoo/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t JarnoKoo/app-client ./client
-  - docker build -t JarnoKoo/app-nginx ./nginx
-  - docker build -t JarnoKoo/app-server ./server
-  - docker build -t JarnoKoo/app-worker ./worker
+  - docker build -t jarnokoo/app-client ./client
+  - docker build -t jarnokoo/app-nginx ./nginx
+  - docker build -t jarnokoo/app-server ./server
+  - docker build -t jarnokoo/app-worker ./worker
 
   # Kirjaudu dockeriin
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Nämä image ladataan docker hubiin
-  - docker push JarnoKoo/app-client
-  - docker push JarnoKoo/app-nginx
-  - docker push JarnoKoo/app-server
-  - docker push JarnoKoo/app-worker
+  - docker push jarnokoo/app-client
+  - docker push jarnokoo/app-nginx
+  - docker push jarnokoo/app-server
+  - docker push jarnokoo/app-worker
